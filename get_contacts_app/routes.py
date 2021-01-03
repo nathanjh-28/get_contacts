@@ -89,7 +89,8 @@ def account():
 @app.route("/admin")
 @app.route("/admin/contacts")
 def admin_home():
-    return render_template('admin-home.html')
+    contacts = Contact.query.all()
+    return render_template('admin-home.html', contacts=contacts)
 
 @app.route("/admin/contacts/one")
 def one_contact():

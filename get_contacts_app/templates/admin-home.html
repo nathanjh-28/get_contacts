@@ -1,6 +1,49 @@
 {% extends 'base.html' %}
 {% block main %}
 
-<h1>admin home</h1>
+<section id="contacts-section" class="section">
+    <div class="container">
+        <button class="button">Show Contacted</button>
+        <div class="box">
+            <h2 class="title has-text-centered">All Contacts</h2>
+
+
+            <div class="table-container">
+                <table class="table is-striped is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Subject</th>
+                            <th>Message</th>
+                            <th>Email List</th>
+                            <th>Contacted</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                        <tr>
+                            <th>{{ contact.id }}</th>
+                            <th>{{ contact.name }}</th>
+                            <th>{{ contact.email }}</th>
+                            <th>{{ contact.phone }}</th>
+                            <th>{{ contact.subject }}</th>
+                            <th>{{ contact.body }}</th>
+                            <th>{{ contact.join }}</th>
+                            <th>Yes/No</th>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</section>
 
 {% endblock %}
