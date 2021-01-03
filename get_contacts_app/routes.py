@@ -1,5 +1,5 @@
 from get_contacts_app import app, db, bcrypt
-from get_contacts_app.models import User#, Post, Contact, Channel
+from get_contacts_app.models import User, Contact#, Post, Channel
 from get_contacts_app.forms import RegistrationForm, LoginForm, UpdateAccountForm, ContactForm#, ChannelForm, PostForm, 
 from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
@@ -11,7 +11,17 @@ def add_contact():
     title = 'Add Contact'
     form = ContactForm()
     if form.validate_on_submit():
-        flash('valid form!','is-success')
+        new_c = Contact(
+            name=form.name.data,
+            email=form.email.data,
+            phone=form.phone.data,
+            subject=form.subject.data,
+            body=form.body.data,
+            join=form.join.data)
+        db.session.add(new_c)
+        db.session.commit()
+        flash('Contact and Message Submitted!','is-success')
+        return redirect(url_for('home'))
     return render_template('form.html',form=form, title=title)
 
 @app.route("/")
