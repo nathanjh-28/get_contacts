@@ -92,7 +92,8 @@ def admin_home():
     contacts = Contact.query.all()
     return render_template('admin-home.html', contacts=contacts)
 
-@app.route("/admin/contacts/one")
-def one_contact():
-    return render_template('one-contact.html')
+@app.route("/admin/contacts/<int:contact_id>")
+def one_contact(contact_id):
+    contact = Contact.query.get(contact_id)
+    return render_template('one-contact.html',contact=contact)
 

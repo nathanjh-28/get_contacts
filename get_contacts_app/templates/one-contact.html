@@ -1,6 +1,35 @@
 {% extends 'base.html' %}
 {% block main %}
 
-<h1>one contact</h1>
+
+<section class="section">
+    <div class="container">
+        <div class="card">
+            <div class="card-content">
+                <h2 class="title is-2">{{ contact.name }}</h2>
+                <p class="subtitle is-6">
+                    <span class="icon"><i class="fas fa-phone"></i></span>{{ contact.phone }}
+                    <span class="icon"><i class="fas fa-envelope"></i></span>{{ contact.email }}
+                </p>
+                <hr>
+                <p class="title is-4">
+                    {{ contact.subject }}
+                </p>
+                <p class="subtitle is-6">
+                    {{ contact.date_posted }}
+                </p>
+                <div class="content">
+                    {{ contact.body }}
+                </div>
+
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Call</a>
+                    <a href="#" class="card-footer-item">Email</a>
+                    <a href="#" class="card-footer-item">Comment</a>
+                </footer>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}

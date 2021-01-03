@@ -25,14 +25,14 @@
                     <tbody>
                         {% for contact in contacts %}
                         <tr>
-                            <th>{{ contact.id }}</th>
-                            <th>{{ contact.name }}</th>
-                            <th>{{ contact.email }}</th>
-                            <th>{{ contact.phone }}</th>
-                            <th>{{ contact.subject }}</th>
-                            <th>{{ contact.body }}</th>
-                            <th>{{ contact.join }}</th>
-                            <th>Yes/No</th>
+                            <th class="has-text-weight-light">{{ contact.id }}</th>
+                            <th class="has-text-weight-light">{{ contact.name }}</th>
+                            <th class="has-text-weight-light">{{ contact.email }}</th>
+                            <th class="has-text-weight-light">{{ contact.phone }}</th>
+                            <th class="has-text-weight-light">{{ contact.subject }}</th>
+                            <th class="has-text-weight-light">{{ contact.body }}</th>
+                            <th class="has-text-weight-light">{{ contact.join }}</th>
+                            <th class="has-text-weight-light">Yes/No</th>
                         </tr>
                         {% endfor %}
                     </tbody>
