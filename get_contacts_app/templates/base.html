@@ -30,7 +30,7 @@
     <header>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
+                <a class="navbar-item" href="{{url_for('home')}}">
                     <h2 class="title is-3">Get Contacts App</h2>
                 </a>
 
@@ -42,14 +42,16 @@
             </div>
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item">About</a>
-                    <a class="navbar-item">Profile</a>
+                    <a href="{{url_for('about')}}" class="navbar-item">About</a>
+                    <a href="{{url_for('account')}}" class="navbar-item">Profile</a>
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a class="button is-primary"><strong>Add Contact</strong></a>
-                            <a class="button is-light">Log out</a>
+                            <a href="{{url_for('home')}}" class="button is-primary"><strong>Add Contact</strong></a>
+                            <a href="{{url_for('register')}}" class="button is-primary"><strong>Register</strong></a>
+                            <a href="{{url_for('logout')}}" class="button is-light">Log Out</a>
+                            <a href="{{url_for('login')}}" class="button is-light">Log In</a>
                         </div>
                     </div>
                 </div>
