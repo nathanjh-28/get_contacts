@@ -1,0 +1,30 @@
+<div class="field">
+    {{form.email.label (class='label')}}
+
+    {% if form.email.errors %}
+
+    <div class="control has-icons-left has-icons-right">
+        {{form.email (class='input is-danger') }}
+        <span class="icon is-small is-left">
+            <!-- Icon for Email -->
+            <i class="fas fa-envelope"></i>
+        </span>
+        <span class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+        </span>
+    </div>
+    {% for error in form.email.errors %}
+    <p class="help is-danger">{{ error }}</p>
+    {% endfor %}
+
+    {% else %}
+
+    <div class="control has-icons-left has-icons-right">
+        {{form.email (class='input') }}
+        <span class="icon is-small is-left">
+            <!-- Icon for Email -->
+            <i class="fas fa-envelope"></i>
+        </span>
+    </div>
+    {% endif %}
+</div>

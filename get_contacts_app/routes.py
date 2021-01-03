@@ -1,5 +1,8 @@
-from get_contacts_app import app
-from flask import render_template, flash
+from get_contacts_app import app#, db, bcrypt
+# from get_contacts_app.models import User, Post, Contact, Channel
+from get_contacts_app.forms import RegistrationForm#, LoginForm, UpdateAccountForm, PostForm, ContactForm, ChannelForm
+from flask import render_template, url_for, flash, redirect, request
+# from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route("/")
 @app.route("/admin/contacts/new")
@@ -10,9 +13,12 @@ def home():
 def about():
     return render_template('about.html')
 
-@app.route("/register")
+@app.route("/register", methods=['GET','POST'])
 def register():
-    return render_template('register.html')
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash('hello')
+    return render_template('register.html',form=form, title='Register')
 
 @app.route("/login")
 def login():

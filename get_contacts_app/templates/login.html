@@ -1,6 +1,25 @@
 {% extends 'base.html' %}
 {% block main %}
 
-<h1>login</h1>
+<section id="register-form">
+    <div class="container">
+        <h2 id="test" class=" has-text-centered title is-3">{{ title }}</h2>
+
+        <div class="box">
+            <form action="" method="POST">
+                {{ form.hidden_tag() }}
+                {% if form.username %}
+                {% include '_form_partials/_username_field.html' %}
+                {% endif %}
+                {% include '_form_partials/_email_field.html' %}
+                {% include '_form_partials/_password_field.html' %}
+                {% if form.confirm_password %}
+                {% include '_form_partials/_confirm_password_field.html' %}
+                {% endif %}
+                {% include '_form_partials/_submit.html' %}
+            </form>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
