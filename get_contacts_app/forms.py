@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 from flask_login import current_user
 from wtforms.fields.html5 import URLField, TelField
 
-# from get_contacts_app.models import User
+from get_contacts_app.models import User
 
 # ===========================================================
 

@@ -9,10 +9,10 @@ app.config['SECRET_KEY'] = '2APngFaCxp6CZ1jG'
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-# db = SQLAlchemy(app)
+db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
-# login_manager = LoginManager(app)
-#login_manager.login_view = 'login'
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
 
 
 from get_contacts_app import routes

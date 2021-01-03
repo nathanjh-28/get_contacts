@@ -1,8 +1,8 @@
 from get_contacts_app import app#, db, bcrypt
-# from get_contacts_app.models import User, Post, Contact, Channel
+from get_contacts_app.models import User#, Post, Contact, Channel
 from get_contacts_app.forms import RegistrationForm, LoginForm#, UpdateAccountForm, PostForm, ContactForm, ChannelForm
 from flask import render_template, url_for, flash, redirect, request
-# from flask_login import login_user, current_user, logout_user, login_required
+from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route("/")
 @app.route("/admin/contacts/new")
