@@ -63,18 +63,24 @@
             </div>
         </nav>
     </header>
+
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     {% for category, message in messages %}
-    <section id="messages" class="container" style="max-width: 500px;">
+    <section id="messages" class="">
 
-        <article class="container message {{ category }}">
+        <article class="message {{ category }}">
             <div class="message-header">
-                <p>New Message</p>
+                <div class="container">
+                    <p class="has-text-centered">Message</p>
+                </div>
 
             </div>
             <div class="message-body">
-                {{ message }}
+                <div class="container has-text-centered">
+
+                    {{ message }}
+                </div>
             </div>
         </article>
     </section>
