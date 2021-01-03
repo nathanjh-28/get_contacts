@@ -2,7 +2,7 @@
 {% block main %}
 
 
-<section id="section" class="section">
+<section id="account-info" class="section">
     <div class="container">
         <h2 class="title has-text-centered">{{ title }}</h2>
         <div class="card">
@@ -28,7 +28,8 @@
                         <div class="card-footer">
 
 
-                            <a href="#" class="mx-6 mt-3 button is-info card-footer-item">Edit Account</a>
+                            <button id="edit-account" class="mx-6 mt-3 button is-info card-footer-item">Edit
+                                Account</button>
                             <a href="#" class="mx-6 mt-3 button is-danger card-footer-item">Delete Account</a>
                         </div>
                     </div>
@@ -36,36 +37,37 @@
 
             </div>
         </div>
+</section>
 
-        <section id="edit-profile-form" class="section">
+<section id="edit-profile-form" class="section hidden">
 
 
-            <div class="container">
-                <h2 class="title has-text-centered"> Edit Account </h2>
-                <div class="card">
-                    <div class="card-content">
-                        <form action="" method="POST">
-                            {{ form.hidden_tag() }}
+    <div class="container">
+        <h2 class="title has-text-centered"> Edit Account </h2>
+        <div class="card">
+            <div class="card-content">
+                <form action="" method="POST">
+                    {{ form.hidden_tag() }}
 
-                            {% include '_form_partials/_username_field.html' %}
-                            {% include '_form_partials/_email_field.html' %}
+                    {% include '_form_partials/_username_field.html' %}
+                    {% include '_form_partials/_email_field.html' %}
 
-                            {% include '_form_partials/_picture_field.html' %}
-                            {% include '_form_partials/_bio_field.html' %}
-                            {% include '_form_partials/_submit.html' %}
+                    {% include '_form_partials/_picture_field.html' %}
+                    {% include '_form_partials/_bio_field.html' %}
+                    {% include '_form_partials/_submit.html' %}
 
-                        </form>
+                </form>
 
-                    </div>
-
-                </div>
             </div>
-        </section>
 
-
-
+        </div>
     </div>
 </section>
+
+
+
+</div>
+
 
 
 
