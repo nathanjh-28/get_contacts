@@ -1,6 +1,6 @@
 from get_contacts_app import app, db, bcrypt
 from get_contacts_app.models import User#, Post, Contact, Channel
-from get_contacts_app.forms import RegistrationForm, LoginForm#, UpdateAccountForm, PostForm, ContactForm, ChannelForm
+from get_contacts_app.forms import RegistrationForm, LoginForm, UpdateAccountForm#, PostForm, ContactForm, ChannelForm
 from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -49,11 +49,25 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route("/account")
+@app.route("/account", methods=['GET','POST'])
 @login_required
 def account():
     title = 'Your Account'
-    return render_template('account.html', title=title)
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.image = form.picture.data
+        current_user.bio = form.bio.data
+        db.session.commit()
+        flash('changes made!', 'is-success')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+        form.picture.data = current_user.image
+        form.bio.data = current_user.bio
+    return render_template('account.html', title=title, form=form)
 
 @app.route("/admin")
 @app.route("/admin/contacts")

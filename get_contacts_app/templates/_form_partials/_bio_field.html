@@ -1,0 +1,24 @@
+<!-- Bio -->
+
+{% if form.bio %}
+<div class="field">
+    {{form.bio.label (class='label')}}
+
+    {% if form.bio.errors %}
+
+    <div class="control">
+        {{form.bio (class='textarea is-danger') }}
+    </div>
+    {% for error in form.bio.errors %}
+    <p class="help is-danger">{{ error }}</p>
+    {% endfor %}
+
+    {% else %}
+
+    <div class="control">
+        {{form.bio (class='textarea') }}
+    </div>
+    {% endif %}
+</div>
+
+{% endif %}

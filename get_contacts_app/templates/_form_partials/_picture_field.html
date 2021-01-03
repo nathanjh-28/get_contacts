@@ -1,0 +1,31 @@
+{% if form.picture %}
+<div class="field">
+    {{form.picture.label (class='label')}}
+
+    {% if form.picture.errors %}
+
+    <div class="control has-icons-left has-icons-right">
+        {{form.picture (class='input is-danger') }}
+        <span class="icon is-small is-left">
+            <i class="fas fa-camera"></i>
+        </span>
+        <span class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+        </span>
+    </div>
+    {% for error in form.picture.errors %}
+    <p class="help is-danger">{{ error }}</p>
+    {% endfor %}
+
+    {% else %}
+
+    <div class="control has-icons-left has-icons-right">
+        {{form.picture (class='input') }}
+        <span class="icon is-small is-left">
+            <i class="fas fa-camera"></i>
+        </span>
+    </div>
+    {% endif %}
+</div>
+
+{% endif %}
