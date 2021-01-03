@@ -4,17 +4,19 @@ from get_contacts_app.forms import RegistrationForm, LoginForm, UpdateAccountFor
 from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 
-@app.route("/", methods=['GET','POST'])
+
 @app.route("/admin/contacts/new", methods=['GET','POST'])
-def home():
+@login_required
+def add_contact():
     title = 'Add Contact'
     form = ContactForm()
     if form.validate_on_submit():
         flash('valid form!','is-success')
-    return render_template('add-contact.html',form=form, title=title)
+    return render_template('form.html',form=form, title=title)
 
+@app.route("/")
 @app.route("/about")
-def about():
+def home():
     title='About This App'
     return render_template('about.html',title=title)
 
@@ -34,7 +36,7 @@ def register():
         db.session.commit()
         flash('Your account has been created.  Please Login','is-success')
         return redirect(url_for('login'))
-    return render_template('auth_form.html',form=form, title='Register')
+    return render_template('form.html',form=form, title='Register')
 
 @app.route("/login", methods=['GET','POST'])
 def login():
@@ -47,7 +49,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('login uncucessful.  Please check email and password', 'is-danger')
-    return render_template('auth_form.html', title='Login', form=form)
+    return render_template('form.html', title='Login', form=form)
 
 @app.route("/logout")
 def logout():
