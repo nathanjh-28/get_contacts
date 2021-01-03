@@ -58,6 +58,24 @@
             </div>
         </nav>
     </header>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <section id="messages" class="">
+
+        <article class="container message {{ category }}">
+            <div class="message-header">
+                <p>New Message</p>
+
+            </div>
+            <div class="message-body">
+                {{ message }}
+            </div>
+        </article>
+    </section>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 
     <main>{% block main %}{% endblock %}</main>
 

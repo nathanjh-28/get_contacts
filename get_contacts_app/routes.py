@@ -1,5 +1,5 @@
 from get_contacts_app import app
-from flask import render_template
+from flask import render_template, flash
 
 @app.route("/")
 @app.route("/admin/contacts/new")
