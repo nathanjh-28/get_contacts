@@ -17,7 +17,7 @@ def about():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash('hello')
+        flash('hello','is-success')
     return render_template('auth_form.html',form=form, title='Register')
 
 @app.route("/login")

@@ -61,7 +61,7 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     {% for category, message in messages %}
-    <section id="messages" class="">
+    <section id="messages" class="container" style="max-width: 500px;">
 
         <article class="container message {{ category }}">
             <div class="message-header">
