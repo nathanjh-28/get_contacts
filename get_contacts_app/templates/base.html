@@ -48,10 +48,15 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
+                            {% if current_user.is_authenticated %}
                             <a href="{{url_for('home')}}" class="button is-primary"><strong>Add Contact</strong></a>
-                            <a href="{{url_for('register')}}" class="button is-primary"><strong>Register</strong></a>
                             <a href="{{url_for('logout')}}" class="button is-light">Log Out</a>
+
+                            {% else %}
+                            <a href="{{url_for('register')}}" class="button is-primary"><strong>Register</strong></a>
                             <a href="{{url_for('login')}}" class="button is-light">Log In</a>
+
+                            {% endif %}
                         </div>
                     </div>
                 </div>
