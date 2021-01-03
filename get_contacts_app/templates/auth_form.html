@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block main %}
 
-<div class="mt-4"></div>
-<section id="register-form">
+<section id="register-form" class="section is-medium">
     <div class="container" style="max-width: 500px;">
         <h2 id="test" class=" has-text-centered title is-3">{{ title }}</h2>
 
@@ -15,6 +14,7 @@
                 {% include '_form_partials/_confirm_password_field.html' %}
                 {% include '_form_partials/_remember.html' %}
                 {% include '_form_partials/_submit.html' %}
+
             </form>
         </div>
     </div>

@@ -2,5 +2,10 @@
 <div class="field is-grouped">
     <div class="control">
         {{form.submit (class='button is-success')}}
+
+        {% if title == 'Login' %}
+        <a class="button is-info" href="{{ url_for('register') }}">Register</a>
+
+        {% endif %}
     </div>
 </div>
