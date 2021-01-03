@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<section class="mt-6">
+    <div style="max-width: 80%;" class="container">
+        <h2 class="title is-2">Contact Us</h2>
+    </div>
+    <!-- Contact Form -->
+    <div style="max-width: 80%;" class="container">
+        <div class="box">
+
+            <!-- Name -->
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Your Name">
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input" type="email" placeholder="Email" value="">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class=""></i>
+                    </span>
+                </div>
+            </div>
+            <!-- Phone -->
+            <div class="field">
+                <label class="label">Phone</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input" type="email" placeholder="Telephone" value="">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-phone"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class=""></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Message Subject -->
+            <div class="field">
+                <label class="label">Subject</label>
+                <div class="control has-icons-right">
+                    <input class="input" type="email" placeholder="Message Subject" value="">
+                    <span class="icon is-small is-right">
+                        <i class=""></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Message Body -->
+            <div class="field">
+                <label class="label">Message</label>
+                <div class="control">
+                    <textarea class="textarea" placeholder="Hello"></textarea>
+                </div>
+            </div>
+
+            <!-- Join Email List -->
+            <div class="field">
+                <div class="control">
+                    <label class="checkbox">
+                        <input type="checkbox">
+                        Join our email list
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-success">Submit</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+{% endblock main %}
