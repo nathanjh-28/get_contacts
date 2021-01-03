@@ -1,6 +1,6 @@
 from get_contacts_app import app#, db, bcrypt
 # from get_contacts_app.models import User, Post, Contact, Channel
-from get_contacts_app.forms import RegistrationForm#, LoginForm, UpdateAccountForm, PostForm, ContactForm, ChannelForm
+from get_contacts_app.forms import RegistrationForm, LoginForm#, UpdateAccountForm, PostForm, ContactForm, ChannelForm
 from flask import render_template, url_for, flash, redirect, request
 # from flask_login import login_user, current_user, logout_user, login_required
 
@@ -18,11 +18,12 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         flash('hello')
-    return render_template('register.html',form=form, title='Register')
+    return render_template('auth_form.html',form=form, title='Register')
 
 @app.route("/login")
 def login():
-    return render_template('login.html')
+    form=LoginForm()
+    return render_template('auth_form.html', title='Login', form=form)
 
 @app.route("/logout")
 def logout():
