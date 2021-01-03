@@ -1,3 +1,4 @@
+{% if form.email %}
 <div class="field">
     {{form.email.label (class='label')}}
 
@@ -28,3 +29,5 @@
     </div>
     {% endif %}
 </div>
+
+{% endif %}

@@ -1,17 +1,22 @@
 from get_contacts_app import app, db, bcrypt
 from get_contacts_app.models import User#, Post, Contact, Channel
-from get_contacts_app.forms import RegistrationForm, LoginForm, UpdateAccountForm#, PostForm, ContactForm, ChannelForm
+from get_contacts_app.forms import RegistrationForm, LoginForm, UpdateAccountForm, ContactForm#, ChannelForm, PostForm, 
 from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 
-@app.route("/")
-@app.route("/admin/contacts/new")
+@app.route("/", methods=['GET','POST'])
+@app.route("/admin/contacts/new", methods=['GET','POST'])
 def home():
-    return render_template('home.html')
+    title = 'Add Contact'
+    form = ContactForm()
+    if form.validate_on_submit():
+        flash('valid form!','is-success')
+    return render_template('add-contact.html',form=form, title=title)
 
 @app.route("/about")
 def about():
-    return render_template('about.html')
+    title='About This App'
+    return render_template('about.html',title=title)
 
 @app.route("/register", methods=['GET','POST'])
 def register():

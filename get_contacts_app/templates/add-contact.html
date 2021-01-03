@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<section id="register-form" class="section">
+    <div class="container" style="max-width: 500px;">
+        <h2 id="test" class=" has-text-centered title is-3">{{ title }}</h2>
+
+        <div class="box">
+            <form action="" method="POST">
+                {{ form.hidden_tag() }}
+
+                {% include '_form_partials/_name_field.html' %}
+                <!-- Auth Form pt 1 -->
+                {% include '_form_partials/_username_field.html' %}
+                {% include '_form_partials/_email_field.html' %}
+                <!-- Contact Form -->
+                {% include '_form_partials/_phone_field.html' %}
+                {% include '_form_partials/_subject_field.html' %}
+                {% include '_form_partials/_body_field.html' %}
+                {% include '_form_partials/_join_email.html' %}
+                <!-- Auth Form pt 2 -->
+                {% include '_form_partials/_password_field.html' %}
+                {% include '_form_partials/_confirm_password_field.html' %}
+                {% include '_form_partials/_remember.html' %}
+                {% include '_form_partials/_submit.html' %}
+
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

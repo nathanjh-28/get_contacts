@@ -80,3 +80,21 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('That email is taken.  Please choose a different one')
+
+
+#____________________________________________________________
+class ContactForm(FlaskForm):
+    #name
+    name = StringField('Name', validators=[DataRequired()], render_kw={'placeholder':'Your Name'})
+    #email
+    email = StringField('Email',validators=[DataRequired(),Email()], render_kw={'placeholder':'Email'})
+    #phone
+    phone = IntegerField('Phone',validators=[NumberRange(min=1000000000,max=9999999999,message='Please enter a valid US Phone Number')], render_kw={'placeholder':'Phone'})
+    #subject
+    subject = StringField('Subject', validators=[DataRequired()], render_kw={'placeholder':'Subject'})
+    #body
+    body = TextAreaField('Message', validators=[DataRequired()], render_kw={'placeholder':'Your Message Here...'})
+    #join email list
+    join = BooleanField('Join our Emailing List')
+    #submit
+    submit = SubmitField('Submit!')

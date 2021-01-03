@@ -1,33 +1,30 @@
-<!-- Password -->
+<!-- Name -->
 
-{% if form.password %}
-
+{% if form.name %}
 <div class="field">
-    {{form.password.label (class='label')}}
+    {{form.name.label (class='label')}}
 
-    {% if form.password.errors %}
+    {% if form.name.errors %}
 
     <div class="control has-icons-left has-icons-right">
-        {{form.password (class='input is-danger') }}
+        {{form.name (class='input is-danger') }}
         <span class="icon is-small is-left">
-            <!-- Icon for Password -->
-            <i class="fas fa-lock"></i>
+            <i class="fas fa-user"></i>
         </span>
         <span class="icon is-small is-right">
             <i class="fas fa-exclamation-triangle"></i>
         </span>
     </div>
-    {% for error in form.password.errors %}
+    {% for error in form.name.errors %}
     <p class="help is-danger">{{ error }}</p>
     {% endfor %}
 
     {% else %}
 
     <div class="control has-icons-left has-icons-right">
-        {{form.password (class='input') }}
+        {{form.name (class='input') }}
         <span class="icon is-small is-left">
-            <!-- Icon for Password -->
-            <i class="fas fa-lock"></i>
+            <i class="fas fa-user"></i>
         </span>
     </div>
     {% endif %}
