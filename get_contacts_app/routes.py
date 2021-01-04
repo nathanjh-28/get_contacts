@@ -4,32 +4,16 @@ from get_contacts_app.forms import RegistrationForm, LoginForm, UpdateAccountFor
 from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 
-
-@app.route("/admin/contacts/new", methods=['GET','POST'])
-@login_required
-def add_contact():
-    title = 'Add Contact'
-    form = ContactForm()
-    if form.validate_on_submit():
-        new_c = Contact(
-            name=form.name.data,
-            email=form.email.data,
-            phone=form.phone.data,
-            subject=form.subject.data,
-            body=form.body.data,
-            join=form.join.data)
-        db.session.add(new_c)
-        db.session.commit()
-        flash('Contact and Message Submitted!','is-success')
-        return redirect(url_for('one_contact', contact_id=new_c.id))
-    return render_template('form.html',form=form, title=title)
-
+#__________________________________________________________ Home Page _________
 @app.route("/")
 @app.route("/about")
 def home():
     title='About This App'
     return render_template('about.html',title=title)
 
+#=======================  User Auth / Account  ================================
+
+#__________________________________________________________ Register __________
 @app.route("/register", methods=['GET','POST'])
 def register():
     if current_user.is_authenticated:
@@ -48,6 +32,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('form.html',form=form, title='Register')
 
+#__________________________________________________________ Login _____________
 @app.route("/login", methods=['GET','POST'])
 def login():
     form=LoginForm()
@@ -61,10 +46,13 @@ def login():
             flash('login uncucessful.  Please check email and password', 'is-danger')
     return render_template('form.html', title='Login', form=form)
 
+#__________________________________________________________ Logout ____________
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+#__________________________________________________________ Account ___________
 
 @app.route("/account", methods=['GET','POST'])
 @login_required
@@ -86,6 +74,28 @@ def account():
         form.bio.data = current_user.bio
     return render_template('account.html', title=title, form=form)
 
+#=======================  Contacts  ===========================================
+
+#__________________________________________________________ Add Contact _______
+@app.route("/admin/contacts/new", methods=['GET','POST'])
+@login_required
+def add_contact():
+    title = 'Add Contact'
+    form = ContactForm()
+    if form.validate_on_submit():
+        new_c = Contact(
+            name=form.name.data,
+            email=form.email.data,
+            phone=form.phone.data,
+            subject=form.subject.data,
+            body=form.body.data,
+            join=form.join.data)
+        db.session.add(new_c)
+        db.session.commit()
+        flash('Contact and Message Submitted!','is-success')
+        return redirect(url_for('one_contact', contact_id=new_c.id))
+    return render_template('form.html',form=form, title=title)
+
 @app.route("/admin")
 @app.route("/admin/contacts")
 @login_required
@@ -93,9 +103,12 @@ def admin_home():
     contacts = Contact.query.all()
     return render_template('admin-home.html', contacts=contacts)
 
+#__________________________________________________________ One Contact _______
+#__________________________________________________________ Add Post __________
 @app.route("/admin/contacts/<int:contact_id>", methods=['GET','POST'])
 @login_required
 def one_contact(contact_id):
+    title = 'Contact'
     contact = Contact.query.get_or_404(contact_id)
     posts = Post.query.filter_by(contact_id=contact.id)
     form = PostForm()
@@ -109,8 +122,8 @@ def one_contact(contact_id):
         db.session.commit()
         flash('Comment Added!','is-success')
         return redirect(url_for('one_contact', contact_id=contact.id))
-    return render_template('one-contact.html',contact=contact,form=form, posts=posts)
-
+    return render_template('one-contact.html',contact=contact,form=form, posts=posts, title=title)
+#__________________________________________________________ Edit Contact ______
 @app.route("/admin/contacts/<int:contact_id>/edit", methods=['GET','POST'])
 @login_required
 def edit_contact(contact_id):
@@ -136,6 +149,7 @@ def edit_contact(contact_id):
         form.join.data = this_contact.join
     return render_template('form.html',form=form,title=title)
 
+#__________________________________________________________ Delete Contact ____
 @app.route("/admin/contacts/<int:contact_id>/delete", methods=['POST'])
 @login_required
 def delete_contact(contact_id):
@@ -144,3 +158,33 @@ def delete_contact(contact_id):
     db.session.commit()
     flash('Contact has been deleted','is-success')
     return redirect(url_for('admin_home'))
+
+#=======================  Posts  ==============================================
+
+#__________________________________________________________ Edit Post _________
+@app.route("/admin/posts/<int:post_id>/edit", methods=['GET','POST'])
+@login_required
+def edit_post(post_id):
+    title = 'Edit Comment'
+    edit_p = Post.query.get(post_id)
+    contact = Contact.query.get(edit_p.contact_id)
+    posts = Post.query.filter_by(contact_id=contact.id)
+    form = PostForm()
+    if form.validate_on_submit():
+        print('hello nathan')
+        edit_p.subject = form.subject.data
+        edit_p.body = form.body.data
+        db.session.commit()
+        flash('Comment has been updated','is-success')
+        return redirect(url_for('one_contact',contact_id=contact.id))
+    elif request.method == 'GET':
+        form.subject.data = edit_p.subject
+        form.body.data = edit_p.body
+    return render_template('one-contact.html',contact=contact,form=form, posts=posts, title=title, edit_p=edit_p)
+
+
+#__________________________________________________________ Delete Post ________
+@app.route("/admin/posts/<int:post_id>/delete", methods=['POST'])
+@login_required
+def delete_post(post_id):
+    pass
