@@ -97,10 +97,19 @@ def admin_home():
 @login_required
 def one_contact(contact_id):
     contact = Contact.query.get_or_404(contact_id)
+    posts = Post.query.filter_by(contact_id=contact.id)
     form = PostForm()
-    if form.validate_on_submit:
-        flash('success!','is-success')
-    return render_template('one-contact.html',contact=contact,form=form)
+    if form.validate_on_submit():
+        comment = Post(
+            subject=form.subject.data,
+            body=form.body.data)
+        comment.contact_thread = contact
+        comment.post_author = current_user
+        db.session.add(comment)
+        db.session.commit()
+        flash('Comment Added!','is-success')
+        return redirect(url_for('one_contact', contact_id=contact.id))
+    return render_template('one-contact.html',contact=contact,form=form, posts=posts)
 
 @app.route("/admin/contacts/<int:contact_id>/edit", methods=['GET','POST'])
 @login_required

@@ -26,6 +26,7 @@
                     <hr>
                     <h3 class="title is-4 has-text-centered mb-0">Comment</h3>
                     <form action="" method="POST">
+                        {{ form.hidden_tag() }}
                         {% include '_form_partials/_subject_field.html'%}
                         {% include '_form_partials/_body_field.html'%}
                         {% include '_form_partials/_submit.html'%}
@@ -53,30 +54,30 @@
     </div>
 </section>
 
-
 <!-- Posts Section -->
 <section class="section">
-    <div class="container">
+    <div class="container box">
+        <h2 class="title has-text-centered">Comments</h2>
+        <hr>
+        {% for post in posts %}
         <article class="media">
             <figure class="media-left">
                 <p class="image is-64x64">
-                    <img src="https://bulma.io/images/placeholders/128x128.png">
+                    <img src="{{ post.post_author.image }}">
                 </p>
+                {{ post.post_author.username }}
             </figure>
             <div class="media-content">
                 <div class="content">
+                    <h4 class="title mb-0">{{ post.subject }}</h4>
                     <p>
-                        <strong>Barbara Middleton</strong>
+                        {{post.body}}
                         <br>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec ultricies
-                        elit blandit non. Suspendisse pellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus
-                        turpis.
-                        <br>
-                        <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+                        <small><a>Reply </a><a href="">Edit </a><a href="">Delete</a></small>
                     </p>
                 </div>
 
-                <article class="media">
+                <!-- <article class="media">
                     <figure class="media-left">
                         <p class="image is-48x48">
                             <img src="https://bulma.io/images/placeholders/96x96.png">
@@ -95,9 +96,9 @@
                             </p>
                         </div>
                     </div>
-                </article>
+                </article> -->
 
-                <article class="media">
+                <!-- <article class="media">
                     <figure class="media-left">
                         <p class="image is-48x48">
                             <img src="https://bulma.io/images/placeholders/96x96.png">
@@ -117,10 +118,11 @@
                             </p>
                         </div>
                     </div>
-                </article>
+                </article> -->
             </div>
         </article>
 
+        {% endfor %}
     </div>
 </section>
 
