@@ -12,12 +12,13 @@
                 <table class="table is-striped is-hoverable is-fullwidth">
                     <thead>
                         <tr>
+                            <th>link</th>
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Subject</th>
-                            <th>Message</th>
+                            <!-- <th>Message</th> -->
                             <th>Email List</th>
                             <th>Contacted</th>
                         </tr>
@@ -25,12 +26,14 @@
                     <tbody>
                         {% for contact in contacts %}
                         <tr>
+                            <th><a href="{{ url_for('one_contact', contact_id=contact.id) }}"><span class="icon"><i
+                                            class="fas fa-arrow-right"></i></span></a></th>
                             <th class="has-text-weight-light">{{ contact.id }}</th>
                             <th class="has-text-weight-light">{{ contact.name }}</th>
                             <th class="has-text-weight-light">{{ contact.email }}</th>
                             <th class="has-text-weight-light">{{ contact.phone }}</th>
                             <th class="has-text-weight-light">{{ contact.subject }}</th>
-                            <th class="has-text-weight-light">{{ contact.body }}</th>
+                            {#}<th class="has-text-weight-light">{{ contact.body }}</th>{#}
                             <th class="has-text-weight-light">{{ contact.join }}</th>
                             <th class="has-text-weight-light">Yes/No</th>
                         </tr>

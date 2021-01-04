@@ -21,7 +21,7 @@ def add_contact():
         db.session.add(new_c)
         db.session.commit()
         flash('Contact and Message Submitted!','is-success')
-        return redirect(url_for('home'))
+        return redirect(url_for('one_contact', contact_id=new_c.id))
     return render_template('form.html',form=form, title=title)
 
 @app.route("/")
@@ -94,6 +94,37 @@ def admin_home():
 
 @app.route("/admin/contacts/<int:contact_id>")
 def one_contact(contact_id):
-    contact = Contact.query.get(contact_id)
+    contact = Contact.query.get_or_404(contact_id)
     return render_template('one-contact.html',contact=contact)
 
+@app.route("/admin/contacts/<int:contact_id>/edit", methods=['GET','POST'])
+def edit_contact(contact_id):
+    title = 'Update Contact'
+    form = ContactForm()
+    this_contact = Contact.query.get(contact_id)
+    if form.validate_on_submit():
+        this_contact.name = form.name.data
+        this_contact.email = form.email.data
+        this_contact.phone = form.phone.data
+        this_contact.subject = form.subject.data
+        this_contact.body = form.body.data
+        this_contact.join = form.join.data
+        db.session.commit()
+        flash('Contact Updated','is-success')
+        return redirect(url_for('one_contact', contact_id=this_contact.id))
+    elif request.method == 'GET':
+        form.name.data = this_contact.name
+        form.email.data = this_contact.email
+        form.phone.data = this_contact.phone
+        form.subject.data = this_contact.subject
+        form.body.data = this_contact.body
+        form.join.data = this_contact.join
+    return render_template('form.html',form=form,title=title)
+
+@app.route("/admin/contacts/<int:contact_id>/delete", methods=['POST'])
+def delete_contact(contact_id):
+    contact = Contact.query.get_or_404(contact_id)
+    db.session.delete(contact)
+    db.session.commit()
+    flash('Contact has been deleted','is-success')
+    return redirect(url_for('admin_home'))
