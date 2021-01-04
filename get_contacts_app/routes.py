@@ -1,6 +1,6 @@
 from get_contacts_app import app, db, bcrypt
-from get_contacts_app.models import User, Contact#, Post, Channel
-from get_contacts_app.forms import RegistrationForm, LoginForm, UpdateAccountForm, ContactForm#, ChannelForm, PostForm, 
+from get_contacts_app.models import User, Contact, Post#, Channel
+from get_contacts_app.forms import RegistrationForm, LoginForm, UpdateAccountForm, ContactForm,PostForm#, ChannelForm,  
 from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -56,7 +56,7 @@ def login():
         if u and bcrypt.check_password_hash(u.password,form.password.data):
             login_user(u,remember=form.remember.data)
             next_page = request.args.get('next') 
-            return redirect(next_page) if next_page else redirect(url_for('home'))
+            return redirect(next_page) if next_page else redirect(url_for('admin_home'))
         else:
             flash('login uncucessful.  Please check email and password', 'is-danger')
     return render_template('form.html', title='Login', form=form)
@@ -88,16 +88,22 @@ def account():
 
 @app.route("/admin")
 @app.route("/admin/contacts")
+@login_required
 def admin_home():
     contacts = Contact.query.all()
     return render_template('admin-home.html', contacts=contacts)
 
-@app.route("/admin/contacts/<int:contact_id>")
+@app.route("/admin/contacts/<int:contact_id>", methods=['GET','POST'])
+@login_required
 def one_contact(contact_id):
     contact = Contact.query.get_or_404(contact_id)
-    return render_template('one-contact.html',contact=contact)
+    form = PostForm()
+    if form.validate_on_submit:
+        flash('success!','is-success')
+    return render_template('one-contact.html',contact=contact,form=form)
 
 @app.route("/admin/contacts/<int:contact_id>/edit", methods=['GET','POST'])
+@login_required
 def edit_contact(contact_id):
     title = 'Update Contact'
     form = ContactForm()
@@ -122,6 +128,7 @@ def edit_contact(contact_id):
     return render_template('form.html',form=form,title=title)
 
 @app.route("/admin/contacts/<int:contact_id>/delete", methods=['POST'])
+@login_required
 def delete_contact(contact_id):
     contact = Contact.query.get_or_404(contact_id)
     db.session.delete(contact)

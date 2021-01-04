@@ -98,3 +98,8 @@ class ContactForm(FlaskForm):
     join = BooleanField('Join our Emailing List')
     #submit
     submit = SubmitField('Submit!')
+
+class PostForm(FlaskForm):
+    subject = StringField('Subject', validators=[DataRequired()])
+    body = TextAreaField('Body', validators=[Length(max=280)])
+    submit = SubmitField('Add Comment')

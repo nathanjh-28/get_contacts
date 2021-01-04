@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     image = db.Column(db.String(60), nullable=False,default=default_image)
     password = db.Column(db.String(60), nullable=False)
     bio = db.Column(db.String(280))
+    posts = db.relationship('Post',backref='post_author', lazy=True)
 
     def __repr__(self):
         return f"User('{self.username}','{self.email}','{self.image}' )"
@@ -31,5 +32,23 @@ class Contact(db.Model):
     subject = db.Column(db.String(75), nullable=False)
     body = db.Column(db.String(280), nullable=False)
     join = db.Column(db.Boolean)
+    contacted = db.Column(db.Boolean)
     #relationship
-    # channels = db.relationship('Channel',backref='thread',lazy=True)
+    posts = db.relationship('Post',backref='contact_thread',lazy=True)
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    subject = db.Column(db.String(100), nullable=False)
+    body = db.Column(db.Text)
+    date_posted = db.Column(
+        db.DateTime, 
+        nullable=False, 
+        default=datetime.utcnow)
+    user_id = db.Column(
+        db.Integer, 
+        db.ForeignKey('user.id'), 
+        nullable=False)
+    contact_id = db.Column(
+        db.Integer,
+        db.ForeignKey('contact.id'),
+        nullable=False)
