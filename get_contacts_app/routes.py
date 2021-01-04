@@ -187,4 +187,9 @@ def edit_post(post_id):
 @app.route("/admin/posts/<int:post_id>/delete", methods=['POST'])
 @login_required
 def delete_post(post_id):
-    pass
+    post = Post.query.get(post_id)
+    c_id = post.contact_id
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your comment has been deleted!', 'is-success')
+    return redirect(url_for('one_contact', contact_id=c_id))
