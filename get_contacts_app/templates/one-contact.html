@@ -5,7 +5,7 @@
 <section class="section">
     <div class="container">
         <div class="card">
-            <p>{{ title }}</p>
+            {#}<p>{{ title }}</p>{#}
             <div class="card-content">
                 <h2 class="title is-2">{{ contact.name }}</h2>
                 <p class="subtitle is-6">
@@ -24,7 +24,18 @@
                 </div>
 
                 <!-- hidden form -->
-                <div id="add-comment-form" class="mb-3">
+                <div id="add-comment-form" class="mb-3
+                {% if title == 'Edit Comment' %}
+                
+                
+                {% else %}
+                hidden
+                
+                {% endif %}
+                ">
+
+
+
                     <hr>
                     <h3 class="title is-4 has-text-centered mb-0">Comment</h3>
                     <form action="" method="POST">
@@ -75,7 +86,8 @@
                     <p>
                         {{post.body}}
                         <br>
-                        <small><a>Reply </a><a href="">Edit </a><a href="">Delete</a></small>
+                        <small><a>Reply </a><a href="{{ url_for('edit_post', post_id=post.id) }}">Edit </a><a
+                                href="">Delete</a></small>
                     </p>
                 </div>
 
