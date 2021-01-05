@@ -86,13 +86,17 @@
                     <p>
                         {{post.body}}
                         <br>
-                        <small><a>Reply </a><a href="{{ url_for('edit_post', post_id=post.id) }}">Edit </a>
+                        <small><a class="button is-white">Reply </a> </small>
 
-                            <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
-                                <button class="button is-white" type="submit">
-                                    <small> Delete</small>
-                                </button>
-                            </form>
+                        {% if current_user.id == post.user_id %}
+                        <a class="button is-white" href="{{ url_for('edit_post', post_id=post.id) }}">Edit </a>
+
+                    <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                        <button class="button is-white" type="submit">
+                            <small> Delete</small>
+                        </button>
+                    </form>
+                    {% endif %}
                     </p>
                 </div>
 
