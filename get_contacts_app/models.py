@@ -28,7 +28,7 @@ class Contact(db.Model):
         db.DateTime, nullable=False, 
         default=datetime.utcnow)
     email = db.Column(db.String(120), nullable=False)
-    phone = db.Column(db.Integer)
+    phone = db.Column(db.String(20))
     subject = db.Column(db.String(75), nullable=False)
     body = db.Column(db.String(280), nullable=False)
     join = db.Column(db.Boolean)
