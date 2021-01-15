@@ -5,9 +5,26 @@ from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 
 #__________________________________________________________ Home Page _________
-@app.route("/")
-@app.route("/about")
+@app.route("/", methods=['GET','POST'])
 def home():
+    form = ContactForm()
+    if form.validate_on_submit():
+        print('success nathan!')
+        new_c = Contact(
+            name=form.name.data,
+            email=form.email.data,
+            phone=form.phone.data,
+            subject=form.subject.data,
+            body=form.body.data,
+            join=form.join.data)
+        db.session.add(new_c)
+        db.session.commit()
+        return render_template('spa-success.html')
+    return render_template('spa-home.html', form=form)
+
+#__________________________________________________________ About Page _________
+@app.route("/about")
+def about():
     title='About This App'
     return render_template('about.html',title=title)
 
@@ -17,7 +34,7 @@ def home():
 @app.route("/register", methods=['GET','POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('about'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
